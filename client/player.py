@@ -1,10 +1,12 @@
 import pygame
+import conect
 
 class Player():
-    def __init__(self, pos: tuple, looking: int):
+    def __init__(self, pos: tuple, looking: int, p_id: int):
         self.pos = [pos[0], pos[1]]
         #0: front, 1: right, 2: back, 3: left
         self.looking = looking
+        self.id = p_id
 
     def draw_left(self, screen:pygame.display, screen_size:tuple):
         points = ((0, 0), (int(screen_size[0]/4), 0), (0, screen_size[1]-2), (int(screen_size[0]/4), screen_size[1]-2))
@@ -64,9 +66,7 @@ class Player():
                 self.draw_left(screen, screen_size)
 
     def events(self, event:pygame.event, maze:list):
-        print(event)
         if event.type == pygame.KEYUP:
-            print("t")
             if event.key == pygame.K_e:
                 self.looking = self.looking + 1 if self.looking < 3 else 0
             elif event.key == pygame.K_q:
@@ -79,10 +79,18 @@ class Player():
 
                 if self.looking == 2 or self.looking == 0:
                     if maze[self.pos[0]+mult][self.pos[1]] == 0:
+                        maze[self.pos[0]][self.pos[1]] = 0
                         self.pos[0] += mult
+                        maze[self.pos[0]][self.pos[1]] = 2
+                        res = conect.move(self)
+                        return res
                 else:
                     if maze[self.pos[0]][self.pos[1]+mult] == 0:
+                        maze[self.pos[0]][self.pos[1]] = 0
                         self.pos[1] += mult
+                        maze[self.pos[0]][self.pos[1]] = 2
+                        res = conect.move(self)
+                        return res
 
                 
 

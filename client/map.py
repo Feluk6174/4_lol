@@ -1,3 +1,5 @@
+import pygame
+
 maze = """################
 #-----#--#-----#
 #--#--#--#--#--#
@@ -49,3 +51,12 @@ if __name__ == "__main__":
     print(maze)
     print("")
     print(encode_maze(load_maze(maze, (16, 16))))
+
+
+def render_minimap(screen:pygame.display, maze:list, screen_size:tuple, size:int): 
+    for y, line in enumerate(maze):
+        for x, tile in enumerate(line):
+            if tile == 1:
+                pygame.draw.rect(screen, (255, 255, 255), (screen_size[0] - len(maze)*size + x*size, screen_size[1] - len(maze)*size + y*size, 5, 5))
+            elif tile == 2:
+                pygame.draw.rect(screen, (255, 0, 0), (screen_size[0] - len(maze)*size + x*size, screen_size[1] - len(maze)*size + y*size, 5, 5))
