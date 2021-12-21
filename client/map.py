@@ -42,6 +42,8 @@ def encode_maze(maze:list):
                 res += "#"
             elif char == 2:
                 res += "X"
+            elif char == 3:
+                res += "O"
 
         res += "\n"
 
@@ -57,6 +59,9 @@ def render_minimap(screen:pygame.display, maze:list, screen_size:tuple, size:int
     for y, line in enumerate(maze):
         for x, tile in enumerate(line):
             if tile == 1:
-                pygame.draw.rect(screen, (255, 255, 255), (screen_size[0] - len(maze)*size + x*size, screen_size[1] - len(maze)*size + y*size, 5, 5))
+                pygame.draw.rect(screen, (255, 255, 255), (x*size, y*size, 5, 5))
             elif tile == 2:
-                pygame.draw.rect(screen, (255, 0, 0), (screen_size[0] - len(maze)*size + x*size, screen_size[1] - len(maze)*size + y*size, 5, 5))
+                pygame.draw.rect(screen, (255, 0, 0), (x*size, y*size, 5, 5))
+
+            elif tile == 3:
+                pygame.draw.rect(screen, (255, 255, 0), (x*size,y*size, 5, 5))

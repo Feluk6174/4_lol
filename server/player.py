@@ -1,10 +1,13 @@
 import pygame
 
 class Player():
-    def __init__(self, pos: tuple, looking: int):
+    def __init__(self, pos: tuple, looking: int, p_id: int):
         self.pos = [pos[0], pos[1]]
         #0: front, 1: right, 2: back, 3: left
         self.looking = looking
+        self.id = p_id
+        self.alive = True
+        self.kills = 0
 
     def draw_left(self, screen:pygame.display, screen_size:tuple):
         points = ((0, 0), (int(screen_size[0]/4), 0), (0, screen_size[1]-2), (int(screen_size[0]/4), screen_size[1]-2))
@@ -90,5 +93,3 @@ class Player():
 
                 
 
-if __name__ == "__name__":
-    import main
